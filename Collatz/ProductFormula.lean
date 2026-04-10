@@ -1,5 +1,5 @@
 import Mathlib
-import RequestProject.Collatz.Defs
+import Collatz.Defs
 
 /-!
 # The Product Formula for Collatz Cycles (Lemma 2.2)

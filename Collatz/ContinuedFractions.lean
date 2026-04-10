@@ -1,7 +1,7 @@
 import Mathlib
-import RequestProject.Collatz.Defs
-import RequestProject.Collatz.ProductFormula
-import RequestProject.Collatz.Sandwich
+import Collatz.Defs
+import Collatz.ProductFormula
+import Collatz.Sandwich
 
 /-!
 # Continued Fractions and the Eliahou Bound

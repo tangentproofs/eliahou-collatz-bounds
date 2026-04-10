@@ -1,6 +1,6 @@
 import Mathlib
-import RequestProject.Collatz.Defs
-import RequestProject.Collatz.ProductFormula
+import Collatz.Defs
+import Collatz.ProductFormula
 
 /-!
 # The Sandwich Inequality (Theorem 2.1)
