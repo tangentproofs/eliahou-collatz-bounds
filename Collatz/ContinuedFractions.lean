@@ -170,7 +170,7 @@ Any fraction L/k₁ in the interval (log₂(3), log₂(3 + 1/m)) for m > 2^40
     3. L/k₁ ∈ (log₂(3), 17087915/10781274): Farey pair (p₁₄/q₁₄, p₁₅/q₁₅)
        gives L ≥ 16785921 + 17087915.
 -/
-theorem rational_approx_bound {k₁ L : ℕ} (hk₁ : 0 < k₁) (hL : 0 < L)
+theorem rational_approx_bound {k₁ L : ℕ} (hk₁ : 0 < k₁)
     {m : ℕ} (hm : 2 ^ 40 < m)
     (hlower : Real.logb 2 3 < (L : ℝ) / k₁)
     (hupper : (L : ℝ) / k₁ ≤ Real.logb 2 (3 + 1 / (m : ℝ))) :
@@ -183,7 +183,7 @@ theorem rational_approx_bound {k₁ L : ℕ} (hk₁ : 0 < k₁) (hL : 0 < L)
       rw [ div_lt_div_iff₀ ] <;> norm_cast;
     · have := logb_three_plus_lt_conv13 m hm;
       convert lt_of_le_of_lt hupper this using 1;
-      norm_num [ div_lt_div_iff₀, hk₁, hL ];
+      norm_num [ div_lt_div_iff₀, hk₁ ];
       norm_cast;
   -- By trichotomy, we have either L/k₁ > 17087915/10781274 or L/k₁ < 17087915/10781274 or L/k₁ = 17087915/10781274.
   by_cases h_trichotomy : (L : ℚ) / k₁ > (17087915 : ℚ) / 10781274 ∨ (L : ℚ) / k₁ < (17087915 : ℚ) / 10781274 ∨ (L : ℚ) / k₁ = (17087915 : ℚ) / 10781274;
@@ -207,7 +207,7 @@ theorem eliahou_bound {L : ℕ} (c : CollatzCycle L)
     (hmin : (2 : ℕ) ^ 40 < c.minElem)
     (hk : 0 < c.numOdd) :
     17087915 ≤ L := by
-  apply rational_approx_bound (by omega) c.hL hmin
+  apply rational_approx_bound (by omega) hmin
     (log2_three_lt_ratio c hk) (ratio_le_log c hk)
 
 /-- More precise form (Theorem 1.1): the cycle length L is expressible as

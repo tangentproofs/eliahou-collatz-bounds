@@ -23,7 +23,7 @@ def collatzComp (n : ℕ) : ℕ :=
 /-
 Key property: 2 * collatzComp(n) equals 3n+1 if n is odd, n if n is even
 -/
-theorem two_mul_collatzComp {n : ℕ} (hn : 0 < n) :
+theorem two_mul_collatzComp {n : ℕ} :
     2 * collatzComp n = if n % 2 = 1 then 3 * n + 1 else n := by
   unfold collatzComp; split_ifs <;> omega;
 
@@ -99,7 +99,7 @@ theorem CollatzCycle.numOdd_add_numEven {L : ℕ} (c : CollatzCycle L) :
     c.numOdd + c.numEven = L := by
   unfold CollatzCycle.numOdd CollatzCycle.numEven;
   convert Finset.card_add_card_compl ( Finset.filter ( fun i => ( c.seq i ) % 2 = 1 ) Finset.univ ) using 1;
-  · unfold CollatzCycle.oddIndices CollatzCycle.evenIndices; simp +decide [ Finset.filter_not, Finset.card_sdiff ] ;
+  · unfold CollatzCycle.oddIndices CollatzCycle.evenIndices; simp +decide ;
   · norm_num
 
 /-

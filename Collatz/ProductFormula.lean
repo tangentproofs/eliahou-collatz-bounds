@@ -27,10 +27,10 @@ def collatzMul (n : ℕ) : ℕ :=
   if n % 2 = 1 then 3 * n + 1 else n
 
 /-- collatzMul relates to collatzComp by: collatzMul n = 2 * collatzComp n -/
-theorem collatzMul_eq_two_mul_collatzComp {n : ℕ} (hn : 0 < n) :
+theorem collatzMul_eq_two_mul_collatzComp {n : ℕ} :
     collatzMul n = 2 * collatzComp n := by
   unfold collatzMul
-  rw [two_mul_collatzComp hn]
+  rw [two_mul_collatzComp]
 
 /-
 collatzMul preserves positivity
@@ -65,7 +65,7 @@ Key step: ∏ collatzMul(seq i) = 2^L * ∏ seq i
 -/
 theorem prod_collatzMul_eq {L : ℕ} (c : CollatzCycle L) :
     ∏ i : Fin L, collatzMul (c.seq i) = 2 ^ L * ∏ i : Fin L, c.seq i := by
-  rw [ Finset.prod_congr rfl fun i hi => collatzMul_eq_two_mul_collatzComp ( c.pos i ), Finset.prod_mul_distrib, Finset.prod_const, Finset.card_fin, prod_collatzComp_eq_prod ]
+  rw [ Finset.prod_congr rfl fun i hi => collatzMul_eq_two_mul_collatzComp, Finset.prod_mul_distrib, Finset.prod_const, Finset.card_fin, prod_collatzComp_eq_prod ]
 
 /-- For even n, collatzMul n = n -/
 @[simp]
