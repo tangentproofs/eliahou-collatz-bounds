@@ -209,19 +209,3 @@ theorem eliahou_bound {L : ℕ} (c : CollatzCycle L)
     17087915 ≤ L := by
   apply rational_approx_bound (by omega) hmin
     (log2_three_lt_ratio c hk) (ratio_le_log c hk)
-
-/-- More precise form (Theorem 1.1): the cycle length L is expressible as
-    301994a + 17087915b + 85137581c with a,b,c ≥ 0, b > 0, ac = 0.
-
-    This requires a more detailed analysis of the semi-convergent structure
-    of the continued fraction of log₂(3), specifically showing that the
-    three Farey pairs between consecutive upper semi-convergents
-    p₁₃ = 301994, p₁₅ = 17087915, p₁₇ = 85137581 completely partition
-    the admissible fractions. The proof is left as an exercise in
-    continued fraction theory. -/
-theorem eliahou_precise {L : ℕ} (c : CollatzCycle L)
-    (hmin : (2 : ℕ) ^ 40 < c.minElem)
-    (hk : 0 < c.numOdd) :
-    ∃ a b cval : ℕ, 0 < b ∧ a * cval = 0 ∧
-    L = 301994 * a + 17087915 * b + 85137581 * cval := by
-  sorry
