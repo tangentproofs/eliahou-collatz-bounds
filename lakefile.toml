@@ -1,5 +1,5 @@
 name = "eliahou-collatz"
-defaultTargets = ["Collatz"]
+defaultTargets = ["Collatz", "Results"]
 
 [[require]]
 name = "mathlib"
@@ -9,3 +9,6 @@ rev = "v4.28.0"
 [[lean_lib]]
 name = "Collatz"
 globs = ["Collatz.+"]
+
+[[lean_lib]]
+name = "Results"
