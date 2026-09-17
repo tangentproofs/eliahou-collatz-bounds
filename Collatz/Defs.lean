@@ -124,3 +124,48 @@ The maximum element is at least any cycle element
 theorem CollatzCycle.le_maxElem {L : ℕ} (c : CollatzCycle L) (i : Fin L) :
     c.seq i ≤ c.maxElem := by
   exact Finset.le_max' ( Finset.univ.image c.seq ) _ ( Finset.mem_image_of_mem _ ( Finset.mem_univ _ ) )
+
+/-
+Every positive compressed Collatz cycle has at least one odd element.
+If every entry were even, the compressed image of the minimum would be a
+strictly smaller positive cycle element — contradiction.
+-/
+theorem CollatzCycle.numOdd_pos {L : ℕ} (c : CollatzCycle L) : 0 < c.numOdd := by
+  by_contra h
+  have hcard : c.oddIndices.card = 0 := by
+    simpa [CollatzCycle.numOdd] using Nat.eq_zero_of_not_pos h
+  have hodd_empty : c.oddIndices = ∅ := Finset.card_eq_zero.mp hcard
+  have hall_even : ∀ i : Fin L, c.seq i % 2 = 0 := by
+    intro i
+    have : i ∉ c.oddIndices := by simp [hodd_empty]
+    simp [CollatzCycle.oddIndices, Finset.mem_filter] at this
+    omega
+  have hmem : c.minElem ∈ Finset.univ.image c.seq := by
+    unfold CollatzCycle.minElem
+    exact Finset.min'_mem _ _
+  obtain ⟨i, _, hi⟩ := Finset.mem_image.mp hmem
+  have heven : c.seq i % 2 = 0 := hall_even i
+  have hcomp : collatzComp (c.seq i) = c.seq i / 2 := by
+    simp [collatzComp, heven]
+  have hge : c.minElem ≤ c.minElem / 2 := by
+    have := c.minElem_le (i.succMod c.hL)
+    rwa [← c.step i, hcomp, hi] at this
+  have hlt : c.minElem / 2 < c.minElem := by
+    simpa [hi] using Nat.div_lt_self (c.pos i) (by decide : 1 < 2)
+  exact (not_le_of_gt hlt) hge
+
+/-- A Collatz cycle whose indexing is injective, so `L` equals the orbit
+cardinality `Card Ω` as in Eliahou (1993). -/
+structure ExactCollatzCycle (L : ℕ) extends CollatzCycle L where
+  injective : Function.Injective seq
+
+/-- For an exact cycle, the image cardinality equals the length parameter. -/
+theorem ExactCollatzCycle.card_eq_length {L : ℕ} (c : ExactCollatzCycle L) :
+    (Finset.univ.image c.seq).card = L := by
+  rw [Finset.card_image_of_injective _ c.injective, Finset.card_fin]
+
+/-- Bridge: injectivity of `seq` forces `L = Card (image seq)`. -/
+theorem CollatzCycle.card_eq_of_injective {L : ℕ} (c : CollatzCycle L)
+    (hinj : Function.Injective c.seq) :
+    (Finset.univ.image c.seq).card = L := by
+  rw [Finset.card_image_of_injective _ hinj, Finset.card_fin]

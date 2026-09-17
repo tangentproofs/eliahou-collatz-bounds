@@ -32,6 +32,8 @@ The argument combines three ingredients:
 open Finset BigOperators Real
 
 set_option maxHeartbeats 4000000
+set_option exponentiation.threshold 100000000
+set_option maxRecDepth 10000
 
 /-! ## Farey pair lemma -/
 
@@ -79,7 +81,7 @@ The pairs (p₁₄, p₁₅) and (p₁₅, p₁₃) form Farey pairs.
 
 /-- p₁₃ · q₁₅ - p₁₅ · q₁₃ = 1 (Farey pair identity) -/
 theorem farey_13_15 : 301994 * 10781274 - 17087915 * 190537 = 1 := by
-  native_decide +revert
+  norm_num
 
 /-
 p₁₄ · q₁₅ - p₁₅ · q₁₄ = 1 (Farey pair identity for consecutive convergents)
@@ -97,13 +99,13 @@ theorem coprime_15 : Nat.Coprime 17087915 10781274 := by
 p₁₅/q₁₅ > log₂(3), equivalently 3^q₁₅ < 2^p₁₅
 -/
 theorem three_pow_lt_two_pow_15 : (3 : ℕ) ^ 10781274 < 2 ^ 17087915 := by
-  native_decide +revert
+  norm_num
 
 /-
 p₁₄/q₁₄ < log₂(3), equivalently 3^q₁₄ > 2^p₁₄
 -/
 theorem two_pow_lt_three_pow_14 : (2 : ℕ) ^ 16785921 < 3 ^ 10590737 := by
-  exact mod_cast by native_decide;
+  norm_num
 
 /-
 The key inequality: log₂(3 + 2⁻⁴⁰) < p₁₃/q₁₃.
@@ -116,7 +118,7 @@ The key inequality: log₂(3 + 2⁻⁴⁰) < p₁₃/q₁₃.
 -/
 theorem log_bound_at_2_40 :
     (3 * 2 ^ 40 + 1 : ℕ) ^ 190537 < 2 ^ 7923474 := by
-  native_decide +revert
+  norm_num
 
 /-! ## Derived inequalities in ℝ -/
 
@@ -125,9 +127,8 @@ log₂(3) < 17087915/10781274
 -/
 theorem logb_three_lt_conv15 :
     Real.logb 2 3 < (17087915 : ℝ) / 10781274 := by
-  rw [ Real.logb, div_lt_div_iff₀ ] <;> norm_num;
-  · rw [ mul_comm, ← Real.log_rpow, ← Real.log_rpow, Real.log_lt_log_iff ] <;> norm_num;
-    exact mod_cast by native_decide;
+  rw [Real.logb, div_lt_div_iff₀] <;> norm_num
+  · rw [mul_comm, ← Real.log_rpow, ← Real.log_rpow, Real.log_lt_log_iff] <;> norm_num
   · positivity
 
 /-
@@ -135,10 +136,9 @@ theorem logb_three_lt_conv15 :
 -/
 theorem conv14_lt_logb_three :
     (16785921 : ℝ) / 10590737 < Real.logb 2 3 := by
-  rw [ div_lt_iff₀' ] <;> norm_num;
-  rw [ Real.logb, mul_div, lt_div_iff₀ ];
-  · rw [ ← Real.log_rpow, ← Real.log_rpow, Real.log_lt_log_iff ] <;> norm_num;
-    exact mod_cast by native_decide;
+  rw [div_lt_iff₀'] <;> norm_num
+  rw [Real.logb, mul_div, lt_div_iff₀]
+  · rw [← Real.log_rpow, ← Real.log_rpow, Real.log_lt_log_iff] <;> norm_num
   · positivity
 
 /-
@@ -146,16 +146,15 @@ log₂(3 + 2⁻⁴⁰) < 301994/190537
 -/
 theorem logb_three_plus_lt_conv13 (m : ℕ) (hm : 2 ^ 40 < m) :
     Real.logb 2 (3 + 1 / (m : ℝ)) < (301994 : ℝ) / 190537 := by
-  -- By combining the results, we conclude the proof.
   have h_log_bound : Real.logb 2 (3 + 1 / (m : ℝ)) < Real.logb 2 ((3 * 2 ^ 40 + 1) / 2 ^ 40) := by
-    gcongr <;> norm_num;
-    nlinarith [ show ( m : ℝ ) ≥ 2 ^ 40 + 1 by exact_mod_cast hm, inv_mul_cancel₀ ( by positivity : ( m : ℝ ) ≠ 0 ) ];
-  refine lt_of_lt_of_le h_log_bound ?_;
-  rw [ Real.logb_le_iff_le_rpow ] <;> norm_num;
-  rw [ Real.le_rpow_iff_log_le ] <;> norm_num;
-  field_simp;
-  rw [ mul_comm, ← Real.log_rpow, ← Real.log_rpow, Real.log_le_log_iff ] <;> norm_num;
-  rw [ div_pow, div_le_iff₀ ] <;> exact mod_cast by native_decide;
+    gcongr <;> norm_num
+    nlinarith [show (m : ℝ) ≥ 2 ^ 40 + 1 by exact_mod_cast hm,
+      inv_mul_cancel₀ (by positivity : (m : ℝ) ≠ 0)]
+  refine lt_of_lt_of_le h_log_bound ?_
+  rw [Real.logb_le_iff_le_rpow] <;> norm_num
+  rw [Real.le_rpow_iff_log_le] <;> norm_num
+  field_simp
+  rw [mul_comm, ← Real.log_rpow, ← Real.log_rpow, Real.log_le_log_iff] <;> norm_num
 
 /-! ## The Main Bound -/
 
@@ -209,3 +208,4 @@ theorem eliahou_bound {L : ℕ} (c : CollatzCycle L)
     17087915 ≤ L := by
   apply rational_approx_bound (by omega) hmin
     (log2_three_lt_ratio c hk) (ratio_le_log c hk)
+

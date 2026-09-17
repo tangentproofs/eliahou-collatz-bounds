@@ -7,17 +7,28 @@ This directory contains a Lean 4 / Mathlib formalization of the main results fro
 
 ## Main Result
 
-**Theorem** (`eliahou_bound`): Any cycle of the compressed Collatz map
-with minimum element > 2^40 has at least **17,087,915** elements.
+**Theorem 1.1** (`eliahou_theorem_1_1` / `rational_linear_form`): Any exact
+(injective) cycle of the compressed Collatz map with minimum element > 2^40
+has cardinality of the form
 
-This is **fully proved** with no sorry, using only standard axioms.
+  `301994·a + 17087915·b + 85137581·c`
+
+with `a, b, c ≥ 0`, `b > 0`, and `a·c = 0`.
+
+**Corollary** (`eliahou_bound` / `eliahou_bound_of_min`): any such cycle has
+at least **17,087,915** elements.
+
+These are **fully proved** with no sorry. Large power comparisons use
+`norm_num` with a raised `exponentiation.threshold` (no `native_decide`).
 
 ## File Structure
 
 ### `Defs.lean` — Basic Definitions
 - `collatzComp`: The compressed Collatz function T(n) = n/2 if even, (3n+1)/2 if odd
 - `CollatzCycle`: Structure representing a cycle of length L
+- `ExactCollatzCycle`: injective wrapper so `L = Card Ω`
 - `numOdd`, `numEven`, `minElem`, `maxElem`: Cycle statistics
+- `numOdd_pos`: every positive cycle has an odd element
 - `trivialCycle`: The trivial cycle {1, 2}
 
 ### `ProductFormula.lean` — Lemma 2.2
@@ -29,16 +40,22 @@ This is **fully proved** with no sorry, using only standard axioms.
 - `eliahou_sandwich`: log₂(3 + 1/M) ≤ L/k₁ ≤ log₂(3 + 1/m)
 - `log2_three_lt_ratio`: log₂(3) < L/k₁ (every cycle has ratio above log₂(3))
 
-### `ContinuedFractions.lean` — Main Bound (Theorem 1.1)
+### `ContinuedFractions.lean` — Lower bound (Theorem 1.1 corollary)
 - `farey_pair_bound`: Lemma 3.1 on Farey pairs
 - Verified numerical facts about convergents of log₂(3):
   - `three_pow_lt_two_pow_15`: 3^10781274 < 2^17087915
   - `two_pow_lt_three_pow_14`: 2^16785921 < 3^10590737
   - `log_bound_at_2_40`: (3·2⁴⁰+1)^190537 < 2^7923474
-  - `farey_13_15`, `farey_14_15`: Farey pair identities
+  - `farey_13_15` (`norm_num`), `farey_14_15`: Farey pair identities
 - `rational_approx_bound`: Any L/k₁ in (log₂3, log₂(3+1/m)) with m > 2^40 has L ≥ 17087915
-- **`eliahou_bound`**: The main theorem (**fully proved**)
-- `eliahou_precise`: The more precise linear combination form (sorry — requires semi-convergent analysis)
+- **`eliahou_bound`**: Lower-bound corollary (**fully proved**)
+
+### `LinearForm.lean` — Full Theorem 1.1
+- `ExactCollatzCycle` / injectivity bridges to paper `Card Ω`
+- `farey_intermediate_coeffs`: intermediate Farey fractions are positive combinations
+- `farey_15_16`, `two_pow_lt_three_pow_16`, `conv16_lt_logb_three`
+- **`rational_linear_form` / `eliahou_theorem_1_1`**: full linear form (**fully proved**)
+- `eliahou_bound_of_min` / `eliahou_bound_card`: paper-facing statements discharging `numOdd_pos`
 
 ## Proof Overview
 
