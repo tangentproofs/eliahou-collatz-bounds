@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Eliahou Collatz Bounds — Lean 4 formalization</title>
+  <meta name="description" content="Lean 4 formalization of Eliahou's 1993 lower bounds on nontrivial Collatz cycle lengths." />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="site">
+    <div class="wrap">
+      <a class="brand" href="index.html">eliahou-collatz-bounds</a>
+      <nav>
+        <a class="active" href="index.html">Overview</a>
+        <a href="#theorems">Theorems</a>
+        <a href="#build">Build</a>
+        <a class="github" href="https://github.com/tangentproofs/eliahou-collatz-bounds">GitHub</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <span class="badge">Lean 4 · Collatz · tangentproofs</span>
+    <h1>Eliahou Collatz Bounds</h1>
+    <p class="lead">
+      Lean&nbsp;4 formalization of Eliahou's 1993 results on Collatz cycle lengths
+      (<em>The 3x+1 problem: new lower bounds on nontrivial cycle lengths</em>,
+      Discrete Mathematics 118).
+    </p>
+
+    <div class="card">
+      <h3>Scope — Theorem 1.1 (full linear form)</h3>
+      <p>
+        For an exact (injective) compressed Collatz cycle Ω with <code>min Ω &gt; 2<sup>40</sup></code>,
+      </p>
+      <pre><code>Card Ω = 301994·a + 17087915·b + 85137581·c</code></pre>
+      <p>
+        for some <code>a, b, c ≥ 0</code> with <code>b &gt; 0</code> and <code>a·c = 0</code>.
+        As a corollary, every such cycle has length at least <strong>17,087,915</strong>.
+      </p>
+      <p class="muted" style="margin-bottom:0">
+        Paper-facing statements live in <code>Results.lean</code> and <code>Collatz/LinearForm.lean</code>.
+        Large power comparisons and Farey identities use <code>norm_num</code>
+        (raised <code>exponentiation.threshold</code>); no <code>native_decide</code> remains.
+      </p>
+    </div>
+
+    <h2 id="theorems">Paper-facing theorems (<code>Results.lean</code>)</h2>
+    <table>
+      <thead>
+        <tr><th>Theorem</th><th>Meaning</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><code>results_eliahou_product_formula</code></td><td>Product identity over odd indices of a Collatz cycle</td></tr>
+        <tr><td><code>results_eliahou_product_formula_real</code></td><td>Real form: ∏ (3 + 1/seq&nbsp;i) = 2<sup>L</sup></td></tr>
+        <tr><td><code>results_eliahou_sandwich</code></td><td>Log sandwich bounds on <code>L / numOdd</code></td></tr>
+        <tr><td><code>results_log2_three_lt_ratio</code></td><td><code>log₂ 3 &lt; L / numOdd</code></td></tr>
+        <tr><td><code>results_farey_pair_bound</code></td><td>Farey-neighbour bound on numerator/denominator</td></tr>
+        <tr><td><code>results_rational_approx_bound</code></td><td>Rational approximation ⇒ <code>L ≥ 17,087,915</code></td></tr>
+        <tr><td><code>results_eliahou_bound</code></td><td>Lower-bound consequence of Thm&nbsp;1.1 (<code>min &gt; 2<sup>40</sup></code>)</td></tr>
+        <tr><td><code>results_eliahou_bound_card</code></td><td>Orbit cardinality bound under injectivity</td></tr>
+        <tr><td><code>results_eliahou_theorem_1_1</code></td><td><strong>Full Eliahou Theorem 1.1</strong> linear form</td></tr>
+        <tr><td><code>results_rational_linear_form</code></td><td>Linear form for length from log bounds</td></tr>
+      </tbody>
+    </table>
+
+    <h2 id="build">Building</h2>
+    <p>
+      Depends on Mathlib (<strong>Lean <code>v4.28.0</code></strong> as locked in
+      <code>lean-toolchain</code> on <code>main</code>). Prefer pre-built caches:
+    </p>
+    <pre><code>git clone https://github.com/tangentproofs/eliahou-collatz-bounds.git
+cd eliahou-collatz-bounds
+lake exe cache get   # download Mathlib oleans — do not build from scratch
+lake build</code></pre>
+    <div class="note">
+      If <code>lake exe cache get</code> fails, ensure <code>curl</code>/<code>wget</code> are available
+      and the toolchain matches <code>lean-toolchain</code>.
+    </div>
+
+    <p class="muted">
+      Math notes: <a href="https://github.com/tangentproofs/eliahou-collatz-bounds/blob/main/Collatz/README.md"><code>Collatz/README.md</code></a>.
+      Project edited with <a href="https://aristotle.harmonic.fun">Aristotle</a>.
+    </p>
+
+    <footer class="site">
+      <p>
+        <a href="https://github.com/tangentproofs/eliahou-collatz-bounds">tangentproofs/eliahou-collatz-bounds</a>
+        · Site is documentation only; Lean sources are authoritative.
+      </p>
+    </footer>
+  </main>
+</body>
+</html>

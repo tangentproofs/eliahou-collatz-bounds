@@ -4,6 +4,8 @@ A Lean 4 formalization of Eliahou's 1993 results on Collatz cycle lengths
 (*The 3x+1 problem: new lower bounds on nontrivial cycle lengths*,
 Discrete Mathematics 118).
 
+**Docs site:** [https://tangentproofs.github.io/eliahou-collatz-bounds/](https://tangentproofs.github.io/eliahou-collatz-bounds/)
+
 Notes on the math: For detailed notes about the mathematics, see
 [Collatz/README.md](Collatz/README.md).
 
