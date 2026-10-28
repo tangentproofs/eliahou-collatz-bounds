@@ -1,0 +1,1955 @@
+[
+ {
+  "id": "CollatzCycle",
+  "name": "CollatzCycle",
+  "kind": "structure",
+  "file": "Collatz/Defs.lean",
+  "module": "Defs",
+  "line": 42,
+  "endLine": 46,
+  "statement": "structure CollatzCycle (L : ℕ) where\n  hL : 0 < L\n  seq : Fin L → ℕ\n  pos : ∀ i, 0 < seq i\n  step : ∀ i : Fin L, collatzComp (seq i) = seq (i.succMod hL)",
+  "variables": [],
+  "truncated": false,
+  "mathlib": [
+   "Fin"
+  ],
+  "meaningDeps": [
+   "collatzComp",
+   "Fin.succMod"
+  ],
+  "proofDeps": [],
+  "usedBy": [
+   "CollatzCycle.card_eq_of_injective",
+   "CollatzCycle.evenIndices",
+   "CollatzCycle.isNontrivial",
+   "CollatzCycle.le_maxElem",
+   "CollatzCycle.maxElem",
+   "CollatzCycle.minElem",
+   "CollatzCycle.minElem_le",
+   "CollatzCycle.minElem_pos",
+   "CollatzCycle.numEven",
+   "CollatzCycle.numOdd",
+   "CollatzCycle.numOdd_add_numEven",
+   "CollatzCycle.numOdd_pos",
+   "CollatzCycle.oddIndices",
+   "CollatzCycle.oddIndices_compl",
+   "CollatzCycle.prod_split_odd_even",
+   "ExactCollatzCycle",
+   "bound_max_le_two_pow",
+   "eliahou_bound",
+   "eliahou_bound_card",
+   "eliahou_bound_of_min",
+   "eliahou_product_formula",
+   "eliahou_product_formula_real",
+   "eliahou_sandwich",
+   "eliahou_theorem_1_1",
+   "log2_three_lt_ratio",
+   "log_le_ratio",
+   "pow_max_le_prod",
+   "prod_collatzComp_eq_prod",
+   "prod_collatzMul_eq",
+   "prod_le_pow_min",
+   "ratio_le_log",
+   "results_eliahou_bound",
+   "results_eliahou_bound_card",
+   "results_eliahou_product_formula",
+   "results_eliahou_product_formula_real",
+   "results_eliahou_sandwich",
+   "results_eliahou_theorem_1_1",
+   "results_log2_three_lt_ratio",
+   "trivialCycle",
+   "two_pow_le_bound_min"
+  ],
+  "depth": 1,
+  "extracted": false
+ },
+ {
+  "id": "CollatzCycle.card_eq_of_injective",
+  "name": "CollatzCycle.card_eq_of_injective",
+  "kind": "theorem",
+  "file": "Collatz/Defs.lean",
+  "module": "Defs",
+  "line": 168,
+  "endLine": 171,
+  "statement": "theorem CollatzCycle.card_eq_of_injective {L : ℕ} (c : CollatzCycle L)\n    (hinj : Function.Injective c.seq) :\n    (Finset.univ.image c.seq).card = L",
+  "variables": [],
+  "truncated": false,
+  "mathlib": [
+   "Function.Injective",
+   "Finset.univ"
+  ],
+  "meaningDeps": [
+   "CollatzCycle"
+  ],
+  "proofDeps": [],
+  "usedBy": [
+   "eliahou_bound_card",
+   "eliahou_theorem_1_1"
+  ],
+  "depth": 1,
+  "extracted": false
+ },
+ {
+  "id": "CollatzCycle.evenIndices",
+  "name": "CollatzCycle.evenIndices",
+  "kind": "def",
+  "file": "Collatz/Defs.lean",
+  "module": "Defs",
+  "line": 53,
+  "endLine": 54,
+  "statement": "def CollatzCycle.evenIndices {L : ℕ} (c : CollatzCycle L) : Finset (Fin L)",
+  "variables": [],
+  "truncated": false,
+  "mathlib": [
+   "Finset",
+   "Fin",
+   "Finset.univ"
+  ],
+  "meaningDeps": [
+   "CollatzCycle"
+  ],
+  "proofDeps": [],
+  "usedBy": [
+   "CollatzCycle.numEven",
+   "CollatzCycle.numOdd_add_numEven",
+   "CollatzCycle.oddIndices_compl",
+   "CollatzCycle.prod_split_odd_even",
+   "eliahou_product_formula"
+  ],
+  "depth": 1,
+  "extracted": false
+ },
+ {
+  "id": "CollatzCycle.isNontrivial",
+  "name": "CollatzCycle.isNontrivial",
+  "kind": "def",
+  "file": "Collatz/Defs.lean",
+  "module": "Defs",
+  "line": 92,
+  "endLine": 93,
+  "statement": "def CollatzCycle.isNontrivial {L : ℕ} (c : CollatzCycle L) : Prop",
+  "variables": [],
+  "truncated": false,
+  "mathlib": [
+   "Prop"
+  ],
+  "meaningDeps": [
+   "CollatzCycle",
+   "CollatzCycle.minElem"
+  ],
+  "proofDeps": [],
+  "usedBy": [],
+  "depth": null,
+  "extracted": false
+ },
+ {
+  "id": "CollatzCycle.le_maxElem",
+  "name": "CollatzCycle.le_maxElem",
+  "kind": "theorem",
+  "file": "Collatz/Defs.lean",
+  "module": "Defs",
+  "line": 124,
+  "endLine": 126,
+  "statement": "theorem CollatzCycle.le_maxElem {L : ℕ} (c : CollatzCycle L) (i : Fin L) :\n    c.seq i ≤ c.maxElem",
+  "variables": [],
+  "truncated": false,
+  "mathlib": [
+   "Fin"
+  ],
+  "meaningDeps": [
+   "CollatzCycle",
+   "CollatzCycle.maxElem"
+  ],
+  "proofDeps": [],
+  "usedBy": [
+   "log2_three_lt_ratio",
+   "pow_max_le_prod"
+  ],
+  "depth": 2,
+  "extracted": false
+ },
+ {
+  "id": "CollatzCycle.maxElem",
+  "name": "CollatzCycle.maxElem",
+  "kind": "def",
+  "file": "Collatz/Defs.lean",
+  "module": "Defs",
+  "line": 72,
+  "endLine": 76,
+  "statement": "noncomputable def CollatzCycle.maxElem {L : ℕ} (c : CollatzCycle L) : ℕ",
+  "variables": [],
+  "truncated": false,
+  "mathlib": [
+   "Fin",
+   "Finset.univ"
+  ],
+  "meaningDeps": [
+   "CollatzCycle"
+  ],
+  "proofDeps": [],
+  "usedBy": [
+   "CollatzCycle.le_maxElem",
+   "bound_max_le_two_pow",
+   "eliahou_sandwich",
+   "log2_three_lt_ratio",
+   "log_le_ratio",
+   "pow_max_le_prod",
+   "results_eliahou_sandwich"
+  ],
+  "depth": 1,
+  "extracted": false
+ },
+ {
+  "id": "CollatzCycle.minElem",
+  "name": "CollatzCycle.minElem",
+  "kind": "def",
+  "file": "Collatz/Defs.lean",
+  "module": "Defs",
+  "line": 65,
+  "endLine": 69,
+  "statement": "noncomputable def CollatzCycle.minElem {L : ℕ} (c : CollatzCycle L) : ℕ",
+  "variables": [],
+  "truncated": false,
+  "mathlib": [
+   "Fin",
+   "Finset.univ"
+  ],
+  "meaningDeps": [
+   "CollatzCycle"
+  ],
+  "proofDeps": [],
+  "usedBy": [
+   "CollatzCycle.isNontrivial",
+   "CollatzCycle.minElem_le",
+   "CollatzCycle.minElem_pos",
+   "CollatzCycle.numOdd_pos",
+   "ExactCollatzCycle.eliahou_bound_card",
+   "ExactCollatzCycle.eliahou_theorem_1_1",
+   "eliahou_bound",
+   "eliahou_bound_card",
+   "eliahou_bound_of_min",
+   "eliahou_sandwich",
+   "eliahou_theorem_1_1",
+   "prod_le_pow_min",
+   "ratio_le_log",
+   "results_eliahou_bound",
+   "results_eliahou_bound_card",
+   "results_eliahou_sandwich",
+   "results_eliahou_theorem_1_1",
+   "two_pow_le_bound_min"
+  ],
+  "depth": 1,
+  "extracted": false
+ },
+ {
+  "id": "CollatzCycle.minElem_le",
+  "name": "CollatzCycle.minElem_le",
+  "kind": "theorem",
+  "file": "Collatz/Defs.lean",
+  "module": "Defs",
+  "line": 117,
+  "endLine": 119,
+  "statement": "theorem CollatzCycle.minElem_le {L : ℕ} (c : CollatzCycle L) (i : Fin L) :\n    c.minElem ≤ c.seq i",
+  "variables": [],
+  "truncated": false,
+  "mathlib": [
+   "Fin"
+  ],
+  "meaningDeps": [
+   "CollatzCycle",
+   "CollatzCycle.minElem"
+  ],
+  "proofDeps": [],
+  "usedBy": [
+   "CollatzCycle.numOdd_pos",
+   "prod_le_pow_min"
+  ],
+  "depth": 2,
+  "extracted": false
+ },
+ {
+  "id": "CollatzCycle.minElem_pos",
+  "name": "CollatzCycle.minElem_pos",
+  "kind": "theorem",
+  "file": "Collatz/Defs.lean",
+  "module": "Defs",
+  "line": 108,
+  "endLine": 112,
+  "statement": "theorem CollatzCycle.minElem_pos {L : ℕ} (c : CollatzCycle L) :\n    0 < c.minElem",
+  "variables": [],
+  "truncated": false,
+  "mathlib": [],
+  "meaningDeps": [
+   "CollatzCycle",
+   "CollatzCycle.minElem"
+  ],
+  "proofDeps": [],
+  "usedBy": [
+   "prod_le_pow_min"
+  ],
+  "depth": 4,
+  "extracted": false
+ },
+ {
+  "id": "CollatzCycle.numEven",
+  "name": "CollatzCycle.numEven",
+  "kind": "def",
+  "file": "Collatz/Defs.lean",
+  "module": "Defs",
+  "line": 61,
+  "endLine": 62,
+  "statement": "noncomputable def CollatzCycle.numEven {L : ℕ} (c : CollatzCycle L) : ℕ",
+  "variables": [],
+  "truncated": false,
+  "mathlib": [],
+  "meaningDeps": [
+   "CollatzCycle",
+   "CollatzCycle.evenIndices"
+  ],
+  "proofDeps": [],
+  "usedBy": [
+   "CollatzCycle.numOdd_add_numEven"
+  ],
+  "depth": null,
+  "extracted": false
+ },
+ {
+  "id": "CollatzCycle.numOdd",
+  "name": "CollatzCycle.numOdd",
+  "kind": "def",
+  "file": "Collatz/Defs.lean",
+  "module": "Defs",
+  "line": 57,
+  "endLine": 58,
+  "statement": "noncomputable def CollatzCycle.numOdd {L : ℕ} (c : CollatzCycle L) : ℕ",
+  "variables": [],
+  "truncated": false,
+  "mathlib": [],
+  "meaningDeps": [
+   "CollatzCycle",
+   "CollatzCycle.oddIndices"
+  ],
+  "proofDeps": [],
+  "usedBy": [
+   "CollatzCycle.numOdd_add_numEven",
+   "CollatzCycle.numOdd_pos",
+   "bound_max_le_two_pow",
+   "eliahou_bound",
+   "eliahou_sandwich",
+   "log2_three_lt_ratio",
+   "log_le_ratio",
+   "pow_max_le_prod",
+   "prod_le_pow_min",
+   "ratio_le_log",
+   "results_eliahou_sandwich",
+   "results_log2_three_lt_ratio",
+   "two_pow_le_bound_min"
+  ],
+  "depth": 1,
+  "extracted": false
+ },
+ {
+  "id": "CollatzCycle.numOdd_add_numEven",
+  "name": "CollatzCycle.numOdd_add_numEven",
+  "kind": "theorem",
+  "file": "Collatz/Defs.lean",
+  "module": "Defs",
+  "line": 98,
+  "endLine": 103,
+  "statement": "theorem CollatzCycle.numOdd_add_numEven {L : ℕ} (c : CollatzCycle L) :\n    c.numOdd + c.numEven = L",
+  "variables": [],
+  "truncated": false,
+  "mathlib": [],
+  "meaningDeps": [
+   "CollatzCycle",
+   "CollatzCycle.numOdd",
+   "CollatzCycle.numEven"
+  ],
+  "proofDeps": [
+   "CollatzCycle.oddIndices",
+   "CollatzCycle.evenIndices"
+  ],
+  "usedBy": [],
+  "depth": null,
+  "extracted": false
+ },
+ {
+  "id": "CollatzCycle.numOdd_pos",
+  "name": "CollatzCycle.numOdd_pos",
+  "kind": "theorem",
+  "file": "Collatz/Defs.lean",
+  "module": "Defs",
+  "line": 133,
+  "endLine": 155,
+  "statement": "theorem CollatzCycle.numOdd_pos {L : ℕ} (c : CollatzCycle L) : 0 < c.numOdd",
+  "variables": [],
+  "truncated": false,
+  "mathlib": [],
+  "meaningDeps": [
+   "CollatzCycle",
+   "CollatzCycle.numOdd"
+  ],
+  "proofDeps": [
+   "CollatzCycle.oddIndices",
+   "CollatzCycle.minElem",
+   "collatzComp",
+   "CollatzCycle.minElem_le",
+   "Fin.succMod"
+  ],
+  "usedBy": [
+   "eliahou_bound_of_min",
+   "eliahou_theorem_1_1",
+   "results_eliahou_sandwich",
+   "results_log2_three_lt_ratio"
+  ],
+  "depth": 1,
+  "extracted": false
+ },
+ {
+  "id": "CollatzCycle.oddIndices",
+  "name": "CollatzCycle.oddIndices",
+  "kind": "def",
+  "file": "Collatz/Defs.lean",
+  "module": "Defs",
+  "line": 49,
+  "endLine": 50,
+  "statement": "def CollatzCycle.oddIndices {L : ℕ} (c : CollatzCycle L) : Finset (Fin L)",
+  "variables": [],
+  "truncated": false,
+  "mathlib": [
+   "Finset",
+   "Fin",
+   "Finset.univ"
+  ],
+  "meaningDeps": [
+   "CollatzCycle"
+  ],
+  "proofDeps": [],
+  "usedBy": [
+   "CollatzCycle.numOdd",
+   "CollatzCycle.numOdd_add_numEven",
+   "CollatzCycle.numOdd_pos",
+   "CollatzCycle.oddIndices_compl",
+   "CollatzCycle.prod_split_odd_even",
+   "eliahou_product_formula",
+   "eliahou_product_formula_real",
+   "pow_max_le_prod",
+   "prod_le_pow_min",
+   "results_eliahou_product_formula",
+   "results_eliahou_product_formula_real"
+  ],
+  "depth": 1,
+  "extracted": false
+ },
+ {
+  "id": "CollatzCycle.oddIndices_compl",
+  "name": "CollatzCycle.oddIndices_compl",
+  "kind": "theorem",
+  "file": "Collatz/ProductFormula.lean",
+  "module": "ProductFormula",
+  "line": 83,
+  "endLine": 86,
+  "statement": "theorem CollatzCycle.oddIndices_compl {L : ℕ} (c : CollatzCycle L) :\n    c.oddIndicesᶜ = c.evenIndices",
+  "variables": [],
+  "truncated": false,
+  "mathlib": [],
+  "meaningDeps": [
+   "CollatzCycle",
+   "CollatzCycle.evenIndices"
+  ],
+  "proofDeps": [
+   "CollatzCycle.oddIndices"
+  ],
+  "usedBy": [],
+  "depth": null,
+  "extracted": false
+ },
+ {
+  "id": "CollatzCycle.prod_split_odd_even",
+  "name": "CollatzCycle.prod_split_odd_even",
+  "kind": "theorem",
+  "file": "Collatz/ProductFormula.lean",
+  "module": "ProductFormula",
+  "line": 91,
+  "endLine": 100,
+  "statement": "theorem CollatzCycle.prod_split_odd_even {L : ℕ} (c : CollatzCycle L)\n    (f : Fin L → ℕ) :\n    ∏ i : Fin L, f i =\n    (∏ i ∈ c.oddIndices, f i) * (∏ i ∈ c.evenIndices, f i)",
+  "variables": [],
+  "truncated": false,
+  "mathlib": [
+   "Fin"
+  ],
+  "meaningDeps": [
+   "CollatzCycle",
+   "CollatzCycle.oddIndices",
+   "CollatzCycle.evenIndices"
+  ],
+  "proofDeps": [],
+  "usedBy": [
+   "eliahou_product_formula"
+  ],
+  "depth": 1,
+  "extracted": false
+ },
+ {
+  "id": "ExactCollatzCycle",
+  "name": "ExactCollatzCycle",
+  "kind": "structure",
+  "file": "Collatz/Defs.lean",
+  "module": "Defs",
+  "line": 159,
+  "endLine": 160,
+  "statement": "structure ExactCollatzCycle (L : ℕ) extends CollatzCycle L where\n  injective : Function.Injective seq",
+  "variables": [],
+  "truncated": false,
+  "mathlib": [
+   "Function.Injective"
+  ],
+  "meaningDeps": [
+   "CollatzCycle"
+  ],
+  "proofDeps": [],
+  "usedBy": [
+   "ExactCollatzCycle.card_eq_length",
+   "ExactCollatzCycle.eliahou_bound_card",
+   "ExactCollatzCycle.eliahou_theorem_1_1"
+  ],
+  "depth": null,
+  "extracted": false
+ },
+ {
+  "id": "ExactCollatzCycle.card_eq_length",
+  "name": "ExactCollatzCycle.card_eq_length",
+  "kind": "theorem",
+  "file": "Collatz/Defs.lean",
+  "module": "Defs",
+  "line": 163,
+  "endLine": 165,
+  "statement": "theorem ExactCollatzCycle.card_eq_length {L : ℕ} (c : ExactCollatzCycle L) :\n    (Finset.univ.image c.seq).card = L",
+  "variables": [],
+  "truncated": false,
+  "mathlib": [
+   "Finset.univ"
+  ],
+  "meaningDeps": [
+   "ExactCollatzCycle"
+  ],
+  "proofDeps": [],
+  "usedBy": [],
+  "depth": null,
+  "extracted": false
+ },
+ {
+  "id": "ExactCollatzCycle.eliahou_bound_card",
+  "name": "ExactCollatzCycle.eliahou_bound_card",
+  "kind": "theorem",
+  "file": "Collatz/LinearForm.lean",
+  "module": "LinearForm",
+  "line": 108,
+  "endLine": 111,
+  "statement": "theorem ExactCollatzCycle.eliahou_bound_card {L : ℕ} (cyc : ExactCollatzCycle L)\n    (hmin : (2 : ℕ) ^ 40 < cyc.minElem) :\n    17087915 ≤ (Finset.univ.image cyc.seq).card",
+  "variables": [],
+  "truncated": false,
+  "mathlib": [
+   "Finset.univ"
+  ],
+  "meaningDeps": [
+   "ExactCollatzCycle",
+   "CollatzCycle.minElem"
+  ],
+  "proofDeps": [],
+  "usedBy": [],
+  "depth": null,
+  "extracted": false
+ },
+ {
+  "id": "ExactCollatzCycle.eliahou_theorem_1_1",
+  "name": "ExactCollatzCycle.eliahou_theorem_1_1",
+  "kind": "theorem",
+  "file": "Collatz/LinearForm.lean",
+  "module": "LinearForm",
+  "line": 182,
+  "endLine": 187,
+  "statement": "theorem ExactCollatzCycle.eliahou_theorem_1_1 {L : ℕ} (cyc : ExactCollatzCycle L)\n    (hmin : (2 : ℕ) ^ 40 < cyc.minElem) :\n    ∃ (a b cCoeff : ℕ), 0 < b ∧ a * cCoeff = 0 ∧\n      (Finset.univ.image cyc.seq).card =\n        301994 * a + 17087915 * b + 85137581 * cCoeff",
+  "variables": [],
+  "truncated": false,
+  "mathlib": [
+   "Finset.univ"
+  ],
+  "meaningDeps": [
+   "ExactCollatzCycle",
+   "CollatzCycle.minElem"
+  ],
+  "proofDeps": [],
+  "usedBy": [],
+  "depth": null,
+  "extracted": false
+ },
+ {
+  "id": "Fin.succMod",
+  "name": "Fin.succMod",
+  "kind": "def",
+  "file": "Collatz/Defs.lean",
+  "module": "Defs",
+  "line": 37,
+  "endLine": 38,
+  "statement": "def Fin.succMod {L : ℕ} (i : Fin L) (hL : 0 < L) : Fin L",
+  "variables": [],
+  "truncated": false,
+  "mathlib": [
+   "Fin"
+  ],
+  "meaningDeps": [],
+  "proofDeps": [],
+  "usedBy": [
+   "CollatzCycle",
+   "CollatzCycle.numOdd_pos",
+   "succMod_bijective",
+   "trivialCycle"
+  ],
+  "depth": 2,
+  "extracted": false
+ },
+ {
+  "id": "bound_max_le_two_pow",
+  "name": "bound_max_le_two_pow",
+  "kind": "theorem",
+  "file": "Collatz/Sandwich.lean",
+  "module": "Sandwich",
+  "line": 65,
+  "endLine": 68,
+  "statement": "theorem bound_max_le_two_pow {L : ℕ} (c : CollatzCycle L) :\n    (3 + 1 / (c.maxElem : ℝ)) ^ c.numOdd ≤ (2 : ℝ) ^ L",
+  "variables": [],
+  "truncated": false,
+  "mathlib": [],
+  "meaningDeps": [
+   "CollatzCycle",
+   "CollatzCycle.maxElem",
+   "CollatzCycle.numOdd"
+  ],
+  "proofDeps": [
+   "eliahou_product_formula_real",
+   "pow_max_le_prod"
+  ],
+  "usedBy": [
+   "log_le_ratio"
+  ],
+  "depth": 2,
+  "extracted": false
+ },
+ {
+  "id": "collatzComp",
+  "name": "collatzComp",
+  "kind": "def",
+  "file": "Collatz/Defs.lean",
+  "module": "Defs",
+  "line": 20,
+  "endLine": 21,
+  "statement": "def collatzComp (n : ℕ) : ℕ",
+  "variables": [],
+  "truncated": false,
+  "mathlib": [],
+  "meaningDeps": [],
+  "proofDeps": [],
+  "usedBy": [
+   "CollatzCycle",
+   "CollatzCycle.numOdd_pos",
+   "collatzComp_one",
+   "collatzComp_pos",
+   "collatzComp_two",
+   "collatzMul_eq_two_mul_collatzComp",
+   "prod_collatzComp_eq_prod",
+   "trivialCycle",
+   "two_mul_collatzComp"
+  ],
+  "depth": 2,
+  "extracted": false
+ },
+ {
+  "id": "collatzComp_one",
+  "name": "collatzComp_one",
+  "kind": "theorem",
+  "file": "Collatz/Defs.lean",
+  "module": "Defs",
+  "line": 78,
+  "endLine": 78,
+  "statement": "@[simp] theorem collatzComp_one : collatzComp 1 = 2",
+  "variables": [],
+  "truncated": false,
+  "mathlib": [],
+  "meaningDeps": [
+   "collatzComp"
+  ],
+  "proofDeps": [],
+  "usedBy": [],
+  "depth": null,
+  "extracted": false
+ },
+ {
+  "id": "collatzComp_pos",
+  "name": "collatzComp_pos",
+  "kind": "theorem",
+  "file": "Collatz/Defs.lean",
+  "module": "Defs",
+  "line": 33,
+  "endLine": 34,
+  "statement": "theorem collatzComp_pos {n : ℕ} (hn : 0 < n) : 0 < collatzComp n",
+  "variables": [],
+  "truncated": false,
+  "mathlib": [],
+  "meaningDeps": [
+   "collatzComp"
+  ],
+  "proofDeps": [],
+  "usedBy": [],
+  "depth": null,
+  "extracted": false
+ },
+ {
+  "id": "collatzComp_two",
+  "name": "collatzComp_two",
+  "kind": "theorem",
+  "file": "Collatz/Defs.lean",
+  "module": "Defs",
+  "line": 79,
+  "endLine": 79,
+  "statement": "@[simp] theorem collatzComp_two : collatzComp 2 = 1",
+  "variables": [],
+  "truncated": false,
+  "mathlib": [],
+  "meaningDeps": [
+   "collatzComp"
+  ],
+  "proofDeps": [],
+  "usedBy": [],
+  "depth": null,
+  "extracted": false
+ },
+ {
+  "id": "collatzMul",
+  "name": "collatzMul",
+  "kind": "def",
+  "file": "Collatz/ProductFormula.lean",
+  "module": "ProductFormula",
+  "line": 26,
+  "endLine": 27,
+  "statement": "def collatzMul (n : ℕ) : ℕ",
+  "variables": [],
+  "truncated": false,
+  "mathlib": [],
+  "meaningDeps": [],
+  "proofDeps": [],
+  "usedBy": [
+   "collatzMul_eq_two_mul_collatzComp",
+   "collatzMul_even",
+   "collatzMul_odd",
+   "collatzMul_pos",
+   "eliahou_product_formula",
+   "prod_collatzMul_eq"
+  ],
+  "depth": 1,
+  "extracted": false
+ },
+ {
+  "id": "collatzMul_eq_two_mul_collatzComp",
+  "name": "collatzMul_eq_two_mul_collatzComp",
+  "kind": "theorem",
+  "file": "Collatz/ProductFormula.lean",
+  "module": "ProductFormula",
+  "line": 30,
+  "endLine": 33,
+  "statement": "theorem collatzMul_eq_two_mul_collatzComp {n : ℕ} :\n    collatzMul n = 2 * collatzComp n",
+  "variables": [],
+  "truncated": false,
+  "mathlib": [],
+  "meaningDeps": [
+   "collatzMul",
+   "collatzComp"
+  ],
+  "proofDeps": [
+   "two_mul_collatzComp"
+  ],
+  "usedBy": [
+   "prod_collatzMul_eq"
+  ],
+  "depth": 2,
+  "extracted": false
+ },
+ {
+  "id": "collatzMul_even",
+  "name": "collatzMul_even",
+  "kind": "theorem",
+  "file": "Collatz/ProductFormula.lean",
+  "module": "ProductFormula",
+  "line": 72,
+  "endLine": 73,
+  "statement": "theorem collatzMul_even {n : ℕ} (hn : n % 2 = 0) : collatzMul n = n",
+  "variables": [],
+  "truncated": false,
+  "mathlib": [],
+  "meaningDeps": [
+   "collatzMul"
+  ],
+  "proofDeps": [],
+  "usedBy": [],
+  "depth": null,
+  "extracted": false
+ },
+ {
+  "id": "collatzMul_odd",
+  "name": "collatzMul_odd",
+  "kind": "theorem",
+  "file": "Collatz/ProductFormula.lean",
+  "module": "ProductFormula",
+  "line": 77,
+  "endLine": 78,
+  "statement": "theorem collatzMul_odd {n : ℕ} (hn : n % 2 = 1) : collatzMul n = 3 * n + 1",
+  "variables": [],
+  "truncated": false,
+  "mathlib": [],
+  "meaningDeps": [
+   "collatzMul"
+  ],
+  "proofDeps": [],
+  "usedBy": [],
+  "depth": null,
+  "extracted": false
+ },
+ {
+  "id": "collatzMul_pos",
+  "name": "collatzMul_pos",
+  "kind": "theorem",
+  "file": "Collatz/ProductFormula.lean",
+  "module": "ProductFormula",
+  "line": 38,
+  "endLine": 40,
+  "statement": "theorem collatzMul_pos {n : ℕ} (hn : 0 < n) : 0 < collatzMul n",
+  "variables": [],
+  "truncated": false,
+  "mathlib": [],
+  "meaningDeps": [
+   "collatzMul"
+  ],
+  "proofDeps": [],
+  "usedBy": [],
+  "depth": null,
+  "extracted": false
+ },
+ {
+  "id": "conv14_lt_logb_three",
+  "name": "conv14_lt_logb_three",
+  "kind": "theorem",
+  "file": "Collatz/ContinuedFractions.lean",
+  "module": "ContinuedFractions",
+  "line": 137,
+  "endLine": 142,
+  "statement": "theorem conv14_lt_logb_three :\n    (16785921 : ℝ) / 10590737 < Real.logb 2 3",
+  "variables": [],
+  "truncated": false,
+  "mathlib": [
+   "Real.logb"
+  ],
+  "meaningDeps": [],
+  "proofDeps": [],
+  "usedBy": [
+   "rational_approx_bound"
+  ],
+  "depth": 4,
+  "extracted": false
+ },
+ {
+  "id": "conv16_lt_logb_three",
+  "name": "conv16_lt_logb_three",
+  "kind": "theorem",
+  "file": "Collatz/LinearForm.lean",
+  "module": "LinearForm",
+  "line": 84,
+  "endLine": 89,
+  "statement": "theorem conv16_lt_logb_three :\n    (85137581 : ℝ) / 53715833 < Real.logb 2 3",
+  "variables": [],
+  "truncated": false,
+  "mathlib": [
+   "Real.logb"
+  ],
+  "meaningDeps": [],
+  "proofDeps": [],
+  "usedBy": [
+   "rational_linear_form"
+  ],
+  "depth": 2,
+  "extracted": false
+ },
+ {
+  "id": "coprime_15",
+  "name": "coprime_15",
+  "kind": "theorem",
+  "file": "Collatz/ContinuedFractions.lean",
+  "module": "ContinuedFractions",
+  "line": 95,
+  "endLine": 96,
+  "statement": "theorem coprime_15 : Nat.Coprime 17087915 10781274",
+  "variables": [],
+  "truncated": false,
+  "mathlib": [
+   "Nat.Coprime"
+  ],
+  "meaningDeps": [],
+  "proofDeps": [],
+  "usedBy": [
+   "rational_linear_form"
+  ],
+  "depth": 2,
+  "extracted": false
+ },
+ {
+  "id": "eliahou_bound",
+  "name": "eliahou_bound",
+  "kind": "theorem",
+  "file": "Collatz/ContinuedFractions.lean",
+  "module": "ContinuedFractions",
+  "line": 205,
+  "endLine": 210,
+  "statement": "theorem eliahou_bound {L : ℕ} (c : CollatzCycle L)\n    (hmin : (2 : ℕ) ^ 40 < c.minElem)\n    (hk : 0 < c.numOdd) :\n    17087915 ≤ L",
+  "variables": [],
+  "truncated": false,
+  "mathlib": [],
+  "meaningDeps": [
+   "CollatzCycle",
+   "CollatzCycle.minElem",
+   "CollatzCycle.numOdd"
+  ],
+  "proofDeps": [
+   "rational_approx_bound",
+   "log2_three_lt_ratio",
+   "ratio_le_log"
+  ],
+  "usedBy": [
+   "eliahou_bound_of_min"
+  ],
+  "depth": 2,
+  "extracted": false
+ },
+ {
+  "id": "eliahou_bound_card",
+  "name": "eliahou_bound_card",
+  "kind": "theorem",
+  "file": "Collatz/LinearForm.lean",
+  "module": "LinearForm",
+  "line": 100,
+  "endLine": 105,
+  "statement": "theorem eliahou_bound_card {L : ℕ} (cyc : CollatzCycle L)\n    (hinj : Function.Injective cyc.seq)\n    (hmin : (2 : ℕ) ^ 40 < cyc.minElem) :\n    17087915 ≤ (Finset.univ.image cyc.seq).card",
+  "variables": [],
+  "truncated": false,
+  "mathlib": [
+   "Function.Injective",
+   "Finset.univ"
+  ],
+  "meaningDeps": [
+   "CollatzCycle",
+   "CollatzCycle.minElem"
+  ],
+  "proofDeps": [
+   "CollatzCycle.card_eq_of_injective",
+   "eliahou_bound_of_min"
+  ],
+  "usedBy": [
+   "results_eliahou_bound_card"
+  ],
+  "depth": 0,
+  "extracted": false
+ },
+ {
+  "id": "eliahou_bound_of_min",
+  "name": "eliahou_bound_of_min",
+  "kind": "theorem",
+  "file": "Collatz/LinearForm.lean",
+  "module": "LinearForm",
+  "line": 94,
+  "endLine": 97,
+  "statement": "theorem eliahou_bound_of_min {L : ℕ} (cyc : CollatzCycle L)\n    (hmin : (2 : ℕ) ^ 40 < cyc.minElem) :\n    17087915 ≤ L",
+  "variables": [],
+  "truncated": false,
+  "mathlib": [],
+  "meaningDeps": [
+   "CollatzCycle",
+   "CollatzCycle.minElem"
+  ],
+  "proofDeps": [
+   "eliahou_bound",
+   "CollatzCycle.numOdd_pos"
+  ],
+  "usedBy": [
+   "eliahou_bound_card",
+   "results_eliahou_bound"
+  ],
+  "depth": 1,
+  "extracted": false
+ },
+ {
+  "id": "eliahou_product_formula",
+  "name": "eliahou_product_formula",
+  "kind": "theorem",
+  "file": "Collatz/ProductFormula.lean",
+  "module": "ProductFormula",
+  "line": 109,
+  "endLine": 120,
+  "statement": "theorem eliahou_product_formula {L : ℕ} (c : CollatzCycle L) :\n    ∏ i ∈ c.oddIndices, (3 * c.seq i + 1) =\n    2 ^ L * ∏ i ∈ c.oddIndices, c.seq i",
+  "variables": [],
+  "truncated": false,
+  "mathlib": [],
+  "meaningDeps": [
+   "CollatzCycle",
+   "CollatzCycle.oddIndices"
+  ],
+  "proofDeps": [
+   "collatzMul",
+   "CollatzCycle.evenIndices",
+   "CollatzCycle.prod_split_odd_even",
+   "prod_collatzMul_eq"
+  ],
+  "usedBy": [
+   "eliahou_product_formula_real",
+   "results_eliahou_product_formula"
+  ],
+  "depth": 0,
+  "extracted": false
+ },
+ {
+  "id": "eliahou_product_formula_real",
+  "name": "eliahou_product_formula_real",
+  "kind": "theorem",
+  "file": "Collatz/ProductFormula.lean",
+  "module": "ProductFormula",
+  "line": 127,
+  "endLine": 133,
+  "statement": "theorem eliahou_product_formula_real {L : ℕ} (c : CollatzCycle L) :\n    ∏ i ∈ c.oddIndices, (3 + 1 / (c.seq i : ℝ)) = (2 : ℝ) ^ L",
+  "variables": [],
+  "truncated": false,
+  "mathlib": [],
+  "meaningDeps": [
+   "CollatzCycle",
+   "CollatzCycle.oddIndices"
+  ],
+  "proofDeps": [
+   "eliahou_product_formula"
+  ],
+  "usedBy": [
+   "bound_max_le_two_pow",
+   "results_eliahou_product_formula_real",
+   "two_pow_le_bound_min"
+  ],
+  "depth": 3,
+  "extracted": false
+ },
+ {
+  "id": "eliahou_sandwich",
+  "name": "eliahou_sandwich",
+  "kind": "theorem",
+  "file": "Collatz/Sandwich.lean",
+  "module": "Sandwich",
+  "line": 98,
+  "endLine": 101,
+  "statement": "theorem eliahou_sandwich {L : ℕ} (c : CollatzCycle L) (hk : 0 < c.numOdd) :\n    Real.logb 2 (3 + 1 / (c.maxElem : ℝ)) ≤ (L : ℝ) / c.numOdd ∧\n    (L : ℝ) / c.numOdd ≤ Real.logb 2 (3 + 1 / (c.minElem : ℝ))",
+  "variables": [],
+  "truncated": false,
+  "mathlib": [
+   "Real.logb"
+  ],
+  "meaningDeps": [
+   "CollatzCycle",
+   "CollatzCycle.numOdd",
+   "CollatzCycle.maxElem",
+   "CollatzCycle.minElem"
+  ],
+  "proofDeps": [
+   "log_le_ratio",
+   "ratio_le_log"
+  ],
+  "usedBy": [
+   "results_eliahou_sandwich"
+  ],
+  "depth": 0,
+  "extracted": false
+ },
+ {
+  "id": "eliahou_theorem_1_1",
+  "name": "eliahou_theorem_1_1",
+  "kind": "theorem",
+  "file": "Collatz/LinearForm.lean",
+  "module": "LinearForm",
+  "line": 171,
+  "endLine": 179,
+  "statement": "theorem eliahou_theorem_1_1 {L : ℕ} (cyc : CollatzCycle L)\n    (hinj : Function.Injective cyc.seq)\n    (hmin : (2 : ℕ) ^ 40 < cyc.minElem) :\n    ∃ (a b cCoeff : ℕ), 0 < b ∧ a * cCoeff = 0 ∧\n      (Finset.univ.image cyc.seq).card =\n        301994 * a + 17087915 * b + 85137581 * cCoeff",
+  "variables": [],
+  "truncated": false,
+  "mathlib": [
+   "Function.Injective",
+   "Finset.univ"
+  ],
+  "meaningDeps": [
+   "CollatzCycle",
+   "CollatzCycle.minElem"
+  ],
+  "proofDeps": [
+   "CollatzCycle.card_eq_of_injective",
+   "rational_linear_form",
+   "CollatzCycle.numOdd_pos",
+   "log2_three_lt_ratio",
+   "ratio_le_log"
+  ],
+  "usedBy": [
+   "results_eliahou_theorem_1_1"
+  ],
+  "depth": 0,
+  "extracted": false
+ },
+ {
+  "id": "farey_13_15",
+  "name": "farey_13_15",
+  "kind": "theorem",
+  "file": "Collatz/ContinuedFractions.lean",
+  "module": "ContinuedFractions",
+  "line": 83,
+  "endLine": 84,
+  "statement": "theorem farey_13_15 : 301994 * 10781274 - 17087915 * 190537 = 1",
+  "variables": [],
+  "truncated": false,
+  "mathlib": [],
+  "meaningDeps": [],
+  "proofDeps": [],
+  "usedBy": [
+   "rational_approx_bound",
+   "rational_linear_form"
+  ],
+  "depth": 2,
+  "extracted": false
+ },
+ {
+  "id": "farey_14_15",
+  "name": "farey_14_15",
+  "kind": "theorem",
+  "file": "Collatz/ContinuedFractions.lean",
+  "module": "ContinuedFractions",
+  "line": 89,
+  "endLine": 90,
+  "statement": "theorem farey_14_15 : 17087915 * 10590737 - 16785921 * 10781274 = 1",
+  "variables": [],
+  "truncated": false,
+  "mathlib": [],
+  "meaningDeps": [],
+  "proofDeps": [],
+  "usedBy": [],
+  "depth": null,
+  "extracted": false
+ },
+ {
+  "id": "farey_15_16",
+  "name": "farey_15_16",
+  "kind": "theorem",
+  "file": "Collatz/LinearForm.lean",
+  "module": "LinearForm",
+  "line": 76,
+  "endLine": 77,
+  "statement": "theorem farey_15_16 : 17087915 * 53715833 - 85137581 * 10781274 = 1",
+  "variables": [],
+  "truncated": false,
+  "mathlib": [],
+  "meaningDeps": [],
+  "proofDeps": [],
+  "usedBy": [
+   "rational_linear_form"
+  ],
+  "depth": 2,
+  "extracted": false
+ },
+ {
+  "id": "farey_intermediate_coeffs",
+  "name": "farey_intermediate_coeffs",
+  "kind": "theorem",
+  "file": "Collatz/LinearForm.lean",
+  "module": "LinearForm",
+  "line": 25,
+  "endLine": 71,
+  "statement": "theorem farey_intermediate_coeffs {p q p' q' x y : ℕ}\n    (hq : 0 < q) (hq' : 0 < q') (hy : 0 < y)\n    (hfarey : p' * q - p * q' = 1)\n    (hleft : (p : ℚ) / q < x / y)\n    (hright : (x : ℚ) / y < p' / q') :\n    ∃ (a b : ℕ), 0 < a ∧ 0 < b ∧\n      x = a * p + b * p' ∧ y = a * q + b * q'",
+  "variables": [],
+  "truncated": false,
+  "mathlib": [],
+  "meaningDeps": [],
+  "proofDeps": [],
+  "usedBy": [
+   "rational_linear_form"
+  ],
+  "depth": 2,
+  "extracted": false
+ },
+ {
+  "id": "farey_numerator_bound",
+  "name": "farey_numerator_bound",
+  "kind": "theorem",
+  "file": "Collatz/ContinuedFractions.lean",
+  "module": "ContinuedFractions",
+  "line": 59,
+  "endLine": 65,
+  "statement": "theorem farey_numerator_bound {p q p' q' x y : ℕ} (hq : 0 < q) (hq' : 0 < q')\n    (hy : 0 < y)\n    (hfarey : p' * q - p * q' = 1)\n    (hleft : (p : ℚ) / q < x / y)\n    (hright : (x : ℚ) / y < p' / q') :\n    p + p' ≤ x",
+  "variables": [],
+  "truncated": false,
+  "mathlib": [],
+  "meaningDeps": [],
+  "proofDeps": [
+   "farey_pair_bound"
+  ],
+  "usedBy": [],
+  "depth": null,
+  "extracted": false
+ },
+ {
+  "id": "farey_pair_bound",
+  "name": "farey_pair_bound",
+  "kind": "theorem",
+  "file": "Collatz/ContinuedFractions.lean",
+  "module": "ContinuedFractions",
+  "line": 45,
+  "endLine": 55,
+  "statement": "theorem farey_pair_bound {p q p' q' x y : ℕ} (hq : 0 < q) (hq' : 0 < q')\n    (hy : 0 < y)\n    (hfarey : p' * q - p * q' = 1)\n    (hleft : (p : ℚ) / q < x / y)\n    (hright : (x : ℚ) / y < p' / q') :\n    p + p' ≤ x ∧ q + q' ≤ y",
+  "variables": [],
+  "truncated": false,
+  "mathlib": [],
+  "meaningDeps": [],
+  "proofDeps": [],
+  "usedBy": [
+   "farey_numerator_bound",
+   "rational_approx_bound",
+   "results_farey_pair_bound"
+  ],
+  "depth": 4,
+  "extracted": false
+ },
+ {
+  "id": "log2_three_lt_ratio",
+  "name": "log2_three_lt_ratio",
+  "kind": "theorem",
+  "file": "Collatz/Sandwich.lean",
+  "module": "Sandwich",
+  "line": 106,
+  "endLine": 113,
+  "statement": "theorem log2_three_lt_ratio {L : ℕ} (c : CollatzCycle L) (hk : 0 < c.numOdd) :\n    Real.logb 2 3 < (L : ℝ) / c.numOdd",
+  "variables": [],
+  "truncated": false,
+  "mathlib": [
+   "Real.logb"
+  ],
+  "meaningDeps": [
+   "CollatzCycle",
+   "CollatzCycle.numOdd"
+  ],
+  "proofDeps": [
+   "CollatzCycle.maxElem",
+   "log_le_ratio",
+   "CollatzCycle.le_maxElem"
+  ],
+  "usedBy": [
+   "eliahou_bound",
+   "eliahou_theorem_1_1",
+   "results_log2_three_lt_ratio"
+  ],
+  "depth": 1,
+  "extracted": false
+ },
+ {
+  "id": "log_bound_at_2_40",
+  "name": "log_bound_at_2_40",
+  "kind": "theorem",
+  "file": "Collatz/ContinuedFractions.lean",
+  "module": "ContinuedFractions",
+  "line": 119,
+  "endLine": 121,
+  "statement": "theorem log_bound_at_2_40 :\n    (3 * 2 ^ 40 + 1 : ℕ) ^ 190537 < 2 ^ 7923474",
+  "variables": [],
+  "truncated": false,
+  "mathlib": [],
+  "meaningDeps": [],
+  "proofDeps": [],
+  "usedBy": [],
+  "depth": null,
+  "extracted": false
+ },
+ {
+  "id": "log_le_ratio",
+  "name": "log_le_ratio",
+  "kind": "theorem",
+  "file": "Collatz/Sandwich.lean",
+  "module": "Sandwich",
+  "line": 87,
+  "endLine": 93,
+  "statement": "theorem log_le_ratio {L : ℕ} (c : CollatzCycle L) (hk : 0 < c.numOdd) :\n    Real.logb 2 (3 + 1 / (c.maxElem : ℝ)) ≤ (L : ℝ) / c.numOdd",
+  "variables": [],
+  "truncated": false,
+  "mathlib": [
+   "Real.logb"
+  ],
+  "meaningDeps": [
+   "CollatzCycle",
+   "CollatzCycle.numOdd",
+   "CollatzCycle.maxElem"
+  ],
+  "proofDeps": [
+   "bound_max_le_two_pow"
+  ],
+  "usedBy": [
+   "eliahou_sandwich",
+   "log2_three_lt_ratio"
+  ],
+  "depth": 1,
+  "extracted": false
+ },
+ {
+  "id": "logb_three_lt_conv15",
+  "name": "logb_three_lt_conv15",
+  "kind": "theorem",
+  "file": "Collatz/ContinuedFractions.lean",
+  "module": "ContinuedFractions",
+  "line": 128,
+  "endLine": 132,
+  "statement": "theorem logb_three_lt_conv15 :\n    Real.logb 2 3 < (17087915 : ℝ) / 10781274",
+  "variables": [],
+  "truncated": false,
+  "mathlib": [
+   "Real.logb"
+  ],
+  "meaningDeps": [],
+  "proofDeps": [],
+  "usedBy": [],
+  "depth": null,
+  "extracted": false
+ },
+ {
+  "id": "logb_three_plus_lt_conv13",
+  "name": "logb_three_plus_lt_conv13",
+  "kind": "theorem",
+  "file": "Collatz/ContinuedFractions.lean",
+  "module": "ContinuedFractions",
+  "line": 147,
+  "endLine": 157,
+  "statement": "theorem logb_three_plus_lt_conv13 (m : ℕ) (hm : 2 ^ 40 < m) :\n    Real.logb 2 (3 + 1 / (m : ℝ)) < (301994 : ℝ) / 190537",
+  "variables": [],
+  "truncated": false,
+  "mathlib": [
+   "Real.logb"
+  ],
+  "meaningDeps": [],
+  "proofDeps": [],
+  "usedBy": [
+   "rational_approx_bound",
+   "rational_linear_form"
+  ],
+  "depth": 2,
+  "extracted": false
+ },
+ {
+  "id": "pow_max_le_prod",
+  "name": "pow_max_le_prod",
+  "kind": "theorem",
+  "file": "Collatz/Sandwich.lean",
+  "module": "Sandwich",
+  "line": 49,
+  "endLine": 56,
+  "statement": "theorem pow_max_le_prod {L : ℕ} (c : CollatzCycle L) :\n    (3 + 1 / (c.maxElem : ℝ)) ^ c.numOdd ≤\n    ∏ i ∈ c.oddIndices, (3 + 1 / (c.seq i : ℝ))",
+  "variables": [],
+  "truncated": false,
+  "mathlib": [],
+  "meaningDeps": [
+   "CollatzCycle",
+   "CollatzCycle.maxElem",
+   "CollatzCycle.numOdd",
+   "CollatzCycle.oddIndices"
+  ],
+  "proofDeps": [
+   "CollatzCycle.le_maxElem"
+  ],
+  "usedBy": [
+   "bound_max_le_two_pow"
+  ],
+  "depth": 3,
+  "extracted": false
+ },
+ {
+  "id": "prod_collatzComp_eq_prod",
+  "name": "prod_collatzComp_eq_prod",
+  "kind": "theorem",
+  "file": "Collatz/ProductFormula.lean",
+  "module": "ProductFormula",
+  "line": 57,
+  "endLine": 61,
+  "statement": "theorem prod_collatzComp_eq_prod {L : ℕ} (c : CollatzCycle L) :\n    ∏ i : Fin L, collatzComp (c.seq i) = ∏ i : Fin L, c.seq i",
+  "variables": [],
+  "truncated": false,
+  "mathlib": [
+   "Fin"
+  ],
+  "meaningDeps": [
+   "CollatzCycle",
+   "collatzComp"
+  ],
+  "proofDeps": [
+   "succMod_bijective"
+  ],
+  "usedBy": [
+   "prod_collatzMul_eq"
+  ],
+  "depth": 2,
+  "extracted": false
+ },
+ {
+  "id": "prod_collatzMul_eq",
+  "name": "prod_collatzMul_eq",
+  "kind": "theorem",
+  "file": "Collatz/ProductFormula.lean",
+  "module": "ProductFormula",
+  "line": 66,
+  "endLine": 68,
+  "statement": "theorem prod_collatzMul_eq {L : ℕ} (c : CollatzCycle L) :\n    ∏ i : Fin L, collatzMul (c.seq i) = 2 ^ L * ∏ i : Fin L, c.seq i",
+  "variables": [],
+  "truncated": false,
+  "mathlib": [
+   "Fin"
+  ],
+  "meaningDeps": [
+   "CollatzCycle",
+   "collatzMul"
+  ],
+  "proofDeps": [
+   "collatzMul_eq_two_mul_collatzComp",
+   "prod_collatzComp_eq_prod"
+  ],
+  "usedBy": [
+   "eliahou_product_formula"
+  ],
+  "depth": 1,
+  "extracted": false
+ },
+ {
+  "id": "prod_le_pow_min",
+  "name": "prod_le_pow_min",
+  "kind": "theorem",
+  "file": "Collatz/Sandwich.lean",
+  "module": "Sandwich",
+  "line": 34,
+  "endLine": 44,
+  "statement": "theorem prod_le_pow_min {L : ℕ} (c : CollatzCycle L) :\n    ∏ i ∈ c.oddIndices, (3 + 1 / (c.seq i : ℝ)) ≤\n    (3 + 1 / (c.minElem : ℝ)) ^ c.numOdd",
+  "variables": [],
+  "truncated": false,
+  "mathlib": [],
+  "meaningDeps": [
+   "CollatzCycle",
+   "CollatzCycle.oddIndices",
+   "CollatzCycle.minElem",
+   "CollatzCycle.numOdd"
+  ],
+  "proofDeps": [
+   "CollatzCycle.minElem_pos",
+   "CollatzCycle.minElem_le"
+  ],
+  "usedBy": [
+   "two_pow_le_bound_min"
+  ],
+  "depth": 3,
+  "extracted": false
+ },
+ {
+  "id": "rat_of_real_div_lt",
+  "name": "rat_of_real_div_lt",
+  "kind": "theorem",
+  "file": "Collatz/LinearForm.lean",
+  "module": "LinearForm",
+  "line": 115,
+  "endLine": 121,
+  "statement": "private theorem rat_of_real_div_lt {a b c d : ℕ}\n    (_hb : 0 < b) (_hd : 0 < d)\n    (h : (a : ℝ) / b < (c : ℝ) / d) :\n    (a : ℚ) / b < (c : ℚ) / d",
+  "variables": [],
+  "truncated": false,
+  "mathlib": [],
+  "meaningDeps": [],
+  "proofDeps": [],
+  "usedBy": [
+   "rational_linear_form"
+  ],
+  "depth": 2,
+  "extracted": false
+ },
+ {
+  "id": "ratio_le_log",
+  "name": "ratio_le_log",
+  "kind": "theorem",
+  "file": "Collatz/Sandwich.lean",
+  "module": "Sandwich",
+  "line": 75,
+  "endLine": 82,
+  "statement": "theorem ratio_le_log {L : ℕ} (c : CollatzCycle L) (hk : 0 < c.numOdd) :\n    (L : ℝ) / c.numOdd ≤ Real.logb 2 (3 + 1 / (c.minElem : ℝ))",
+  "variables": [],
+  "truncated": false,
+  "mathlib": [
+   "Real.logb"
+  ],
+  "meaningDeps": [
+   "CollatzCycle",
+   "CollatzCycle.numOdd",
+   "CollatzCycle.minElem"
+  ],
+  "proofDeps": [
+   "two_pow_le_bound_min"
+  ],
+  "usedBy": [
+   "eliahou_bound",
+   "eliahou_sandwich",
+   "eliahou_theorem_1_1"
+  ],
+  "depth": 1,
+  "extracted": false
+ },
+ {
+  "id": "rational_approx_bound",
+  "name": "rational_approx_bound",
+  "kind": "theorem",
+  "file": "Collatz/ContinuedFractions.lean",
+  "module": "ContinuedFractions",
+  "line": 172,
+  "endLine": 197,
+  "statement": "theorem rational_approx_bound {k₁ L : ℕ} (hk₁ : 0 < k₁)\n    {m : ℕ} (hm : 2 ^ 40 < m)\n    (hlower : Real.logb 2 3 < (L : ℝ) / k₁)\n    (hupper : (L : ℝ) / k₁ ≤ Real.logb 2 (3 + 1 / (m : ℝ))) :\n    17087915 ≤ L",
+  "variables": [],
+  "truncated": false,
+  "mathlib": [
+   "Real.logb"
+  ],
+  "meaningDeps": [],
+  "proofDeps": [
+   "conv14_lt_logb_three",
+   "logb_three_plus_lt_conv13",
+   "farey_pair_bound",
+   "farey_13_15"
+  ],
+  "usedBy": [
+   "eliahou_bound",
+   "results_rational_approx_bound"
+  ],
+  "depth": 3,
+  "extracted": false
+ },
+ {
+  "id": "rational_linear_form",
+  "name": "rational_linear_form",
+  "kind": "theorem",
+  "file": "Collatz/LinearForm.lean",
+  "module": "LinearForm",
+  "line": 125,
+  "endLine": 166,
+  "statement": "theorem rational_linear_form {k₁ L : ℕ} (hk₁ : 0 < k₁)\n    {m : ℕ} (hm : 2 ^ 40 < m)\n    (hlower : Real.logb 2 3 < (L : ℝ) / k₁)\n    (hupper : (L : ℝ) / k₁ ≤ Real.logb 2 (3 + 1 / (m : ℝ))) :\n    ∃ (a b c : ℕ), 0 < b ∧ a * c = 0 ∧\n      L = 301994 * a + 17087915 * b + 85137581 * c",
+  "variables": [],
+  "truncated": false,
+  "mathlib": [
+   "Real.logb"
+  ],
+  "meaningDeps": [],
+  "proofDeps": [
+   "rat_of_real_div_lt",
+   "conv16_lt_logb_three",
+   "logb_three_plus_lt_conv13",
+   "farey_intermediate_coeffs",
+   "farey_15_16",
+   "coprime_15",
+   "farey_13_15"
+  ],
+  "usedBy": [
+   "eliahou_theorem_1_1",
+   "results_rational_linear_form"
+  ],
+  "depth": 1,
+  "extracted": false
+ },
+ {
+  "id": "results_eliahou_bound",
+  "name": "results_eliahou_bound",
+  "kind": "theorem",
+  "file": "Results.lean",
+  "module": "Results",
+  "line": 37,
+  "endLine": 40,
+  "statement": "theorem results_eliahou_bound {L : ℕ} (c : CollatzCycle L)\n    (hmin : (2 : ℕ) ^ 40 < c.minElem) :\n    17087915 ≤ L",
+  "variables": [],
+  "truncated": false,
+  "mathlib": [],
+  "meaningDeps": [
+   "CollatzCycle",
+   "CollatzCycle.minElem"
+  ],
+  "proofDeps": [
+   "eliahou_bound_of_min"
+  ],
+  "usedBy": [],
+  "depth": null,
+  "extracted": false
+ },
+ {
+  "id": "results_eliahou_bound_card",
+  "name": "results_eliahou_bound_card",
+  "kind": "theorem",
+  "file": "Results.lean",
+  "module": "Results",
+  "line": 43,
+  "endLine": 47,
+  "statement": "theorem results_eliahou_bound_card {L : ℕ} (c : CollatzCycle L)\n    (hinj : Function.Injective c.seq)\n    (hmin : (2 : ℕ) ^ 40 < c.minElem) :\n    17087915 ≤ (Finset.univ.image c.seq).card",
+  "variables": [],
+  "truncated": false,
+  "mathlib": [
+   "Function.Injective",
+   "Finset.univ"
+  ],
+  "meaningDeps": [
+   "CollatzCycle",
+   "CollatzCycle.minElem"
+  ],
+  "proofDeps": [
+   "eliahou_bound_card"
+  ],
+  "usedBy": [],
+  "depth": null,
+  "extracted": false
+ },
+ {
+  "id": "results_eliahou_product_formula",
+  "name": "results_eliahou_product_formula",
+  "kind": "theorem",
+  "file": "Results.lean",
+  "module": "Results",
+  "line": 3,
+  "endLine": 6,
+  "statement": "theorem results_eliahou_product_formula {L : ℕ} (c : CollatzCycle L) :\n    ∏ i ∈ c.oddIndices, (3 * c.seq i + 1) =\n    2 ^ L * ∏ i ∈ c.oddIndices, c.seq i",
+  "variables": [],
+  "truncated": false,
+  "mathlib": [],
+  "meaningDeps": [
+   "CollatzCycle",
+   "CollatzCycle.oddIndices"
+  ],
+  "proofDeps": [
+   "eliahou_product_formula"
+  ],
+  "usedBy": [],
+  "depth": null,
+  "extracted": false
+ },
+ {
+  "id": "results_eliahou_product_formula_real",
+  "name": "results_eliahou_product_formula_real",
+  "kind": "theorem",
+  "file": "Results.lean",
+  "module": "Results",
+  "line": 8,
+  "endLine": 10,
+  "statement": "theorem results_eliahou_product_formula_real {L : ℕ} (c : CollatzCycle L) :\n    ∏ i ∈ c.oddIndices, (3 + 1 / (c.seq i : ℝ)) = (2 : ℝ) ^ L",
+  "variables": [],
+  "truncated": false,
+  "mathlib": [],
+  "meaningDeps": [
+   "CollatzCycle",
+   "CollatzCycle.oddIndices"
+  ],
+  "proofDeps": [
+   "eliahou_product_formula_real"
+  ],
+  "usedBy": [],
+  "depth": null,
+  "extracted": false
+ },
+ {
+  "id": "results_eliahou_sandwich",
+  "name": "results_eliahou_sandwich",
+  "kind": "theorem",
+  "file": "Results.lean",
+  "module": "Results",
+  "line": 12,
+  "endLine": 15,
+  "statement": "theorem results_eliahou_sandwich {L : ℕ} (c : CollatzCycle L) :\n    Real.logb 2 (3 + 1 / (c.maxElem : ℝ)) ≤ (L : ℝ) / c.numOdd ∧\n    (L : ℝ) / c.numOdd ≤ Real.logb 2 (3 + 1 / (c.minElem : ℝ))",
+  "variables": [],
+  "truncated": false,
+  "mathlib": [
+   "Real.logb"
+  ],
+  "meaningDeps": [
+   "CollatzCycle",
+   "CollatzCycle.maxElem",
+   "CollatzCycle.numOdd",
+   "CollatzCycle.minElem"
+  ],
+  "proofDeps": [
+   "eliahou_sandwich",
+   "CollatzCycle.numOdd_pos"
+  ],
+  "usedBy": [],
+  "depth": null,
+  "extracted": false
+ },
+ {
+  "id": "results_eliahou_theorem_1_1",
+  "name": "results_eliahou_theorem_1_1",
+  "kind": "theorem",
+  "file": "Results.lean",
+  "module": "Results",
+  "line": 50,
+  "endLine": 56,
+  "statement": "theorem results_eliahou_theorem_1_1 {L : ℕ} (c : CollatzCycle L)\n    (hinj : Function.Injective c.seq)\n    (hmin : (2 : ℕ) ^ 40 < c.minElem) :\n    ∃ (a b cCoeff : ℕ), 0 < b ∧ a * cCoeff = 0 ∧\n      (Finset.univ.image c.seq).card =\n        301994 * a + 17087915 * b + 85137581 * cCoeff",
+  "variables": [],
+  "truncated": false,
+  "mathlib": [
+   "Function.Injective",
+   "Finset.univ"
+  ],
+  "meaningDeps": [
+   "CollatzCycle",
+   "CollatzCycle.minElem"
+  ],
+  "proofDeps": [
+   "eliahou_theorem_1_1"
+  ],
+  "usedBy": [],
+  "depth": null,
+  "extracted": false
+ },
+ {
+  "id": "results_farey_pair_bound",
+  "name": "results_farey_pair_bound",
+  "kind": "theorem",
+  "file": "Results.lean",
+  "module": "Results",
+  "line": 21,
+  "endLine": 27,
+  "statement": "theorem results_farey_pair_bound {p q p' q' x y : ℕ} (hq : 0 < q) (hq' : 0 < q')\n    (hy : 0 < y)\n    (hfarey : p' * q - p * q' = 1)\n    (hleft : (p : ℚ) / q < x / y)\n    (hright : (x : ℚ) / y < p' / q') :\n    p + p' ≤ x ∧ q + q' ≤ y",
+  "variables": [],
+  "truncated": false,
+  "mathlib": [],
+  "meaningDeps": [],
+  "proofDeps": [
+   "farey_pair_bound"
+  ],
+  "usedBy": [],
+  "depth": null,
+  "extracted": false
+ },
+ {
+  "id": "results_log2_three_lt_ratio",
+  "name": "results_log2_three_lt_ratio",
+  "kind": "theorem",
+  "file": "Results.lean",
+  "module": "Results",
+  "line": 17,
+  "endLine": 19,
+  "statement": "theorem results_log2_three_lt_ratio {L : ℕ} (c : CollatzCycle L) :\n    Real.logb 2 3 < (L : ℝ) / c.numOdd",
+  "variables": [],
+  "truncated": false,
+  "mathlib": [
+   "Real.logb"
+  ],
+  "meaningDeps": [
+   "CollatzCycle",
+   "CollatzCycle.numOdd"
+  ],
+  "proofDeps": [
+   "log2_three_lt_ratio",
+   "CollatzCycle.numOdd_pos"
+  ],
+  "usedBy": [],
+  "depth": null,
+  "extracted": false
+ },
+ {
+  "id": "results_rational_approx_bound",
+  "name": "results_rational_approx_bound",
+  "kind": "theorem",
+  "file": "Results.lean",
+  "module": "Results",
+  "line": 29,
+  "endLine": 34,
+  "statement": "theorem results_rational_approx_bound {k₁ L : ℕ} (hk₁ : 0 < k₁)\n    {m : ℕ} (hm : 2 ^ 40 < m)\n    (hlower : Real.logb 2 3 < (L : ℝ) / k₁)\n    (hupper : (L : ℝ) / k₁ ≤ Real.logb 2 (3 + 1 / (m : ℝ))) :\n    17087915 ≤ L",
+  "variables": [],
+  "truncated": false,
+  "mathlib": [
+   "Real.logb"
+  ],
+  "meaningDeps": [],
+  "proofDeps": [
+   "rational_approx_bound"
+  ],
+  "usedBy": [],
+  "depth": null,
+  "extracted": false
+ },
+ {
+  "id": "results_rational_linear_form",
+  "name": "results_rational_linear_form",
+  "kind": "theorem",
+  "file": "Results.lean",
+  "module": "Results",
+  "line": 58,
+  "endLine": 64,
+  "statement": "theorem results_rational_linear_form {k₁ L : ℕ} (hk₁ : 0 < k₁)\n    {m : ℕ} (hm : 2 ^ 40 < m)\n    (hlower : Real.logb 2 3 < (L : ℝ) / k₁)\n    (hupper : (L : ℝ) / k₁ ≤ Real.logb 2 (3 + 1 / (m : ℝ))) :\n    ∃ (a b c : ℕ), 0 < b ∧ a * c = 0 ∧\n      L = 301994 * a + 17087915 * b + 85137581 * c",
+  "variables": [],
+  "truncated": false,
+  "mathlib": [
+   "Real.logb"
+  ],
+  "meaningDeps": [],
+  "proofDeps": [
+   "rational_linear_form"
+  ],
+  "usedBy": [],
+  "depth": null,
+  "extracted": false
+ },
+ {
+  "id": "succMod_bijective",
+  "name": "succMod_bijective",
+  "kind": "theorem",
+  "file": "Collatz/ProductFormula.lean",
+  "module": "ProductFormula",
+  "line": 45,
+  "endLine": 52,
+  "statement": "theorem succMod_bijective (L : ℕ) (hL : 0 < L) :\n    Function.Bijective (fun i : Fin L => i.succMod hL)",
+  "variables": [],
+  "truncated": false,
+  "mathlib": [
+   "Function.Bijective",
+   "Fin"
+  ],
+  "meaningDeps": [
+   "Fin.succMod"
+  ],
+  "proofDeps": [],
+  "usedBy": [
+   "prod_collatzComp_eq_prod"
+  ],
+  "depth": 3,
+  "extracted": false
+ },
+ {
+  "id": "three_pow_lt_two_pow_15",
+  "name": "three_pow_lt_two_pow_15",
+  "kind": "theorem",
+  "file": "Collatz/ContinuedFractions.lean",
+  "module": "ContinuedFractions",
+  "line": 101,
+  "endLine": 102,
+  "statement": "theorem three_pow_lt_two_pow_15 : (3 : ℕ) ^ 10781274 < 2 ^ 17087915",
+  "variables": [],
+  "truncated": false,
+  "mathlib": [],
+  "meaningDeps": [],
+  "proofDeps": [],
+  "usedBy": [],
+  "depth": null,
+  "extracted": false
+ },
+ {
+  "id": "trivialCycle",
+  "name": "trivialCycle",
+  "kind": "def",
+  "file": "Collatz/Defs.lean",
+  "module": "Defs",
+  "line": 82,
+  "endLine": 87,
+  "statement": "def trivialCycle : CollatzCycle 2",
+  "variables": [],
+  "truncated": false,
+  "mathlib": [],
+  "meaningDeps": [
+   "CollatzCycle",
+   "Fin.succMod",
+   "collatzComp"
+  ],
+  "proofDeps": [],
+  "usedBy": [],
+  "depth": null,
+  "extracted": false
+ },
+ {
+  "id": "two_mul_collatzComp",
+  "name": "two_mul_collatzComp",
+  "kind": "theorem",
+  "file": "Collatz/Defs.lean",
+  "module": "Defs",
+  "line": 26,
+  "endLine": 28,
+  "statement": "theorem two_mul_collatzComp {n : ℕ} :\n    2 * collatzComp n = if n % 2 = 1 then 3 * n + 1 else n",
+  "variables": [],
+  "truncated": false,
+  "mathlib": [],
+  "meaningDeps": [
+   "collatzComp"
+  ],
+  "proofDeps": [],
+  "usedBy": [
+   "collatzMul_eq_two_mul_collatzComp"
+  ],
+  "depth": 3,
+  "extracted": false
+ },
+ {
+  "id": "two_pow_le_bound_min",
+  "name": "two_pow_le_bound_min",
+  "kind": "theorem",
+  "file": "Collatz/Sandwich.lean",
+  "module": "Sandwich",
+  "line": 59,
+  "endLine": 62,
+  "statement": "theorem two_pow_le_bound_min {L : ℕ} (c : CollatzCycle L) :\n    (2 : ℝ) ^ L ≤ (3 + 1 / (c.minElem : ℝ)) ^ c.numOdd",
+  "variables": [],
+  "truncated": false,
+  "mathlib": [],
+  "meaningDeps": [
+   "CollatzCycle",
+   "CollatzCycle.minElem",
+   "CollatzCycle.numOdd"
+  ],
+  "proofDeps": [
+   "eliahou_product_formula_real",
+   "prod_le_pow_min"
+  ],
+  "usedBy": [
+   "ratio_le_log"
+  ],
+  "depth": 2,
+  "extracted": false
+ },
+ {
+  "id": "two_pow_lt_three_pow_14",
+  "name": "two_pow_lt_three_pow_14",
+  "kind": "theorem",
+  "file": "Collatz/ContinuedFractions.lean",
+  "module": "ContinuedFractions",
+  "line": 107,
+  "endLine": 108,
+  "statement": "theorem two_pow_lt_three_pow_14 : (2 : ℕ) ^ 16785921 < 3 ^ 10590737",
+  "variables": [],
+  "truncated": false,
+  "mathlib": [],
+  "meaningDeps": [],
+  "proofDeps": [],
+  "usedBy": [],
+  "depth": null,
+  "extracted": false
+ },
+ {
+  "id": "two_pow_lt_three_pow_16",
+  "name": "two_pow_lt_three_pow_16",
+  "kind": "theorem",
+  "file": "Collatz/LinearForm.lean",
+  "module": "LinearForm",
+  "line": 80,
+  "endLine": 81,
+  "statement": "theorem two_pow_lt_three_pow_16 : (2 : ℕ) ^ 85137581 < 3 ^ 53715833",
+  "variables": [],
+  "truncated": false,
+  "mathlib": [],
+  "meaningDeps": [],
+  "proofDeps": [],
+  "usedBy": [],
+  "depth": null,
+  "extracted": false
+ }
+]

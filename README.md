@@ -6,6 +6,8 @@ Discrete Mathematics 118).
 
 **Docs site:** [https://tangentproofs.github.io/eliahou-collatz-bounds/](https://tangentproofs.github.io/eliahou-collatz-bounds/)
 
+**Plain-English explainer:** [https://tangentproofs.github.io/eliahou-collatz-bounds/learn/](https://tangentproofs.github.io/eliahou-collatz-bounds/learn/): every statement read back into English, with proof outlines, quizzes, a faithfulness review and browsable source (sources in `learn/`).
+
 Notes on the math: For detailed notes about the mathematics, see
 [Collatz/README.md](Collatz/README.md).
 

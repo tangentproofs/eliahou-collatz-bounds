@@ -1,0 +1,7 @@
+{
+  "roots": ["Collatz", "Results.lean", "Main.lean"],
+  "ns": "",
+  "headlines": ["eliahou_theorem_1_1", "eliahou_bound_card", "eliahou_product_formula", "eliahou_sandwich"],
+  "mathlibNamespaces": ["Finset", "Real", "Nat", "Int", "Function", "List", "Equiv", "ZMod", "Rat", "Fintype", "Set", "BigOperators", "Multiset"],
+  "mathlibNames": ["Finset", "Fin", "Nat", "Int", "Real", "Rat", "Fintype", "Prop"]
+}

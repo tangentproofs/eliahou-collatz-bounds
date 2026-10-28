@@ -1,1 +1,4 @@
 .lake
+learn/node_modules/
+learn/dist/
+__pycache__/
